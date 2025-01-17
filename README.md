@@ -1,99 +1,133 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Contact Microservice
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este repositorio contiene un microservicio desarrollado con **NestJS** para la gestión de contactos. Es un componente independiente que forma parte de una arquitectura de microservicios y está diseñado para ser modular, escalable y fácil de mantener.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## Características
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- CRUD completo para la gestión de contactos.
+- Arquitectura modular basada en **NestJS**.
+- Preparado para contenedorización con Docker.
+- Uso de TypeScript para un desarrollo tipado y robusto.
+- Configurable mediante variables de entorno.
 
-## Project setup
+---
 
+## Requisitos Previos
+
+- **Node.js** (versión 18 o superior).
+- **npm** (versión 8 o superior) o **yarn**.
+- **Docker** y **Docker Compose** (opcional, para ejecutar en contenedores).
+
+---
+
+## Instalación
+
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/GermanSan2002/contact-microservice.git
+   cd contact-microservice
+   ```
+
+2. **Instalar dependencias:**
+   ```bash
+   npm install
+   # o usando yarn
+   yarn install
+   ```
+
+3. **Configurar variables de entorno:**
+   Crear un archivo `.env` en la raíz del proyecto y definir las siguientes variables:
+   ```env
+   DATABASE_HOST=localhost
+   DATABASE_PORT=5432
+   DATABASE_USER=your_user
+   DATABASE_PASSWORD=your_password
+   DATABASE_NAME=your_database
+   PORT=3000
+   ```
+
+4. **Ejecutar migraciones de base de datos:** (si aplica)
+   ```bash
+   npm run migration:run
+   ```
+
+---
+
+## Ejecución
+
+### Desarrollo
+Para ejecutar el proyecto en modo de desarrollo:
 ```bash
-$ npm install
+npm run start:dev
+```
+El servidor estará disponible en `http://localhost:3000` (o el puerto definido en las variables de entorno).
+
+### Producción
+Para compilar y ejecutar en producción:
+```bash
+npm run build
+npm run start:prod
 ```
 
-## Compile and run the project
-
+### Uso con Docker
+Si prefieres ejecutar el microservicio en un contenedor Docker:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+docker-compose up --build
 ```
+Esto levantará el servicio y las dependencias (como la base de datos) especificadas en el archivo `docker-compose.yml`.
 
-## Run tests
+---
 
+## Endpoints Principales
+
+| Método | Endpoint            | Descripción                 |
+|--------|---------------------|-----------------------------|
+| GET    | `/contacts`         | Obtener todos los contactos |
+| GET    | `/contacts/:id`     | Obtener un contacto por ID  |
+| POST   | `/contacts`         | Crear un nuevo contacto     |
+| PUT    | `/contacts/:id`     | Actualizar un contacto por ID |
+| DELETE | `/contacts/:id`     | Eliminar un contacto por ID |
+
+**Nota:** La API usa JSON para las solicitudes y respuestas.
+
+---
+
+## Pruebas
+
+Para ejecutar las pruebas:
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run test
 ```
+Esto ejecutará las pruebas unitarias y de integración configuradas en el proyecto.
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Mejoras Futuras
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- Implementar un sistema de autenticación y autorización.
+- Mejorar el manejo de errores y registros.
+- Agregar más pruebas unitarias y de integración.
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+---
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## Contribuciones
 
-## Resources
+Si deseas contribuir a este proyecto, sigue los pasos a continuación:
+1. Haz un fork del repositorio.
+2. Crea una rama nueva para tu funcionalidad o corrección: `git checkout -b feature/nueva-funcionalidad`.
+3. Realiza tus cambios y haz un commit: `git commit -m "Agrega nueva funcionalidad"`.
+4. Envía un pull request a este repositorio.
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Licencia
 
-## Support
+Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## Contacto
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Para preguntas o soporte, puedes contactar al propietario del repositorio a través de GitHub.
